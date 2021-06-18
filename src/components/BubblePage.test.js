@@ -1,13 +1,42 @@
-import React from 'react';
-import { render, screen} from "@testing-library/react";
-import BubblePage from './BubblePage';
+import React from "react";
+import { render, screen, waitFor } from "@testing-library/react";
+import BubblePage from "./BubblePage";
+import fetchColorService from "../services/fetchColorService";
+jest.mock("../services/fetchColorService");
 
 test("Renders without errors", ()=> {
+    fetchColorService.mockResolvedValue(colorList);
     render(<BubblePage />)
 });
 
-test("Renders appropriate number of colors passed in through mock", async ()=> {
-    render(<BubblePage /> )
-    const colors = await screen.queryAllByTestId('color');
-    expect(colors.length).toBe(11)
+
+const colorList = [
+    {
+        color: "aliceblue",
+        code: {
+            hex: "#f0f8ff",
+        },
+        id: 1,
+    },
+    {
+        color: "limegreen",
+        code: {
+            hex: "#99ddbc",
+        },
+        id: 2,
+    },
+    {
+        color: "aqua",
+        code: {
+            hex: "#00ffff",
+        },
+        id: 3,
+    },
+];
+
+test("Renders appropriate number of colors passed in through mock", async () => {
+    fetchColorService.mockResolvedValue(colorList);
+    render(<BubblePage />);
+    const colors = await screen.findAllByTestId("color");
+    expect(colors.length).toBe(colorList.length);
 });

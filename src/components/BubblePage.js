@@ -12,13 +12,9 @@ const BubblePage = () => {
   const [editing, setEditing] = useState(false);
 
   useEffect(() => {
-    (async () => {
-      try {
-        setColors(await fetchColorService());
-      } catch (err) {
-        console.error(err);
-      }
-    })();
+      fetchColorService().then(colors => {
+        setColors(colors);
+      }).catch(err => console.error(err))
   }, []);
 
   const toggleEdit = (value) => {
@@ -26,7 +22,7 @@ const BubblePage = () => {
   };
 
   const saveEdit = (editColor) => {
-      (async () => {
+      ( async () => {
         try {
           const data = await editColorService(editColor)
           setColors(colors.map((color) => {
