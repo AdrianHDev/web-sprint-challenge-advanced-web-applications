@@ -38,7 +38,7 @@ const Login = () => {
           </label>
           <label>
             Password:<br/>
-            <input type="password " onChange={handleChange} value={userInfo.password} name="password" data-testid="password" id="passwordInput " />
+            <input type="password" onChange={handleChange} value={userInfo.password} name="password" data-testid="password" id="passwordInput " />
             <br/>
           </label>
           <button type="submit">Log-In</button>
