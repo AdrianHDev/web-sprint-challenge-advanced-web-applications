@@ -1,17 +1,20 @@
 import axios from "axios";
 import React, {   useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
   const [userInfo, setUserInfo]= useState({username: "", password: ""})
   const [error, setError] = useState('')
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
+  const history = useHistory()
 
   const handleSubmit = async ev => {
     ev.preventDefault();
     try {
       const result = await axios.post('http://localhost:5000/api/login', userInfo)
       localStorage.setItem('token', result.data.payload)
+      history.push('/bubbles')
     } catch (err) {
       setError(err.message)
     }
