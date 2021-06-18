@@ -3,10 +3,11 @@ import React, { useEffect, useState } from "react";
 import Bubbles from "./Bubbles";
 import ColorList from "./ColorList";
 
-import { editColorService, deleteColorService } from '../services/colorServices';
+// import { editColorService, deleteColorService } from '../services/colorServices';
 import fetchColorService from '../services/fetchColorService';
 
 const BubblePage = () => {
+  console.log('Bubble!')
   const [colors, setColors] = useState([]);
   const [editing, setEditing] = useState(false);
 
